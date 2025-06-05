@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>更新期刊数据库</title>
+</head>
+<body>
+    <h2>更新期刊数据库</h2>
+
+    <h3>批量更新：</h3>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="file" accept=".csv" required>
+        <button type="submit">上传并更新</button>
+    </form>
+    <p><strong>提示：</strong>CSV 文件中“等级”列的格式应为类似: <code>A刊（水保）</code>。</p>
+
+    <h3>更新单条记录：</h3>
+    <form method="GET" action="">
+        <label>期刊名称: <input type="text" name="journal_name" required></label>
+        <label>等级: <input type="text" name="level" required></label> <small>格式示例：A刊（水保）</small>
+        <button type="submit">提交</button>
+        <label><input type="checkbox" name="delete" value="true"> 删除此记录</label>
+    </form>
+
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+    {% endif %}
+    {% if message %}
+        <p style="color:green;">{{ message }}</p>
+    {% endif %}
+</body>
+</html>

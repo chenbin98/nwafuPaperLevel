@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>查询期刊等级</title>
+</head>
+<body>
+    <h2>查询期刊等级</h2>
+    <form method="GET" action="">
+        <label>期刊名称: <input type="text" name="journal_name" required></label>
+        <button type="submit" name="submit" value="true">查询</button>
+    </form>
+
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+    {% endif %}
+    {% if message %}
+        <p style="color:orange;">
+            {{ message }}，欢迎到<a href="/goodjournal/update/">添加该期刊</a>。
+        </p>
+    {% endif %}
+    {% if result %}
+        <h3>查询结果：</h3>
+        <p>期刊名称：{{ result.期刊名称 }}</p>
+        <p>等级：{{ result.等级 }}</p>
+    {% endif %}
+</body>
+</html>
