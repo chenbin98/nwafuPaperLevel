@@ -2,26 +2,75 @@
 <html>
 <head>
     <title>查询期刊等级</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+        .result-box {
+            background-color: #e9ecef;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .btn-primary {
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+        }
+        .btn-primary:hover {
+            background-color: #0b5ed7;
+            border-color: #0a58ca;
+        }
+    </style>
 </head>
 <body>
-    <h2>查询期刊等级</h2>
-    <form method="GET" action="">
-        <label>期刊名称: <input type="text" name="journal_name" required></label>
-        <button type="submit" name="submit" value="true">查询</button>
-    </form>
+    <div class="container">
+        <h2 class="text-center mb-4">查询期刊等级</h2>
+        
+        <form method="GET" action="" class="mb-4">
+            <div class="input-group">
+                <input type="text" name="journal_name" class="form-control" placeholder="请输入期刊名称" required>
+                <button type="submit" name="submit" value="true" class="btn btn-primary">查询</button>
+            </div>
+        </form>
 
-    {% if error %}
-        <p style="color:red;">{{ error }}</p>
-    {% endif %}
-    {% if message %}
-        <p style="color:orange;">
-            {{ message }}，欢迎到<a href="/goodjournal/update/">添加该期刊</a>。
-        </p>
-    {% endif %}
-    {% if result %}
-        <h3>查询结果：</h3>
-        <p>期刊名称：{{ result.期刊名称 }}</p>
-        <p>等级：{{ result.等级 }}</p>
-    {% endif %}
+        {% if error %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endif %}
+        
+        {% if message %}
+            <div class="alert alert-warning" role="alert">
+                {{ message }}，欢迎到<a href="/goodjournal/update/" class="alert-link">添加该期刊</a>。
+            </div>
+        {% endif %}
+        
+        {% if result %}
+            <div class="result-box">
+                <h3 class="mb-3">查询结果：</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>期刊名称：</strong>{{ result.期刊名称 }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>等级：</strong>{{ result.等级 }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
